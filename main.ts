@@ -47,6 +47,7 @@ game.setDialogFrame(img`
     .6699999999999999999966.
     ..66666666666666666666..
     `)
+game.showLongText("Collect at least 10 white clouds.", DialogLayout.Center)
 game.showLongText("Avoid the gray storm clouds!", DialogLayout.Center)
 let mySprite = sprites.create(img`
     ....ffffff.........ccc..
@@ -91,9 +92,8 @@ game.onUpdateInterval(500, function () {
         ......ccccccccccc.......
         `, 50, 0)
     projectile.y = randint(10, 110)
-    if (Math.percentChance(75)) {
-        projectile.setKind(SpriteKind.Goal)
-    } else {
+    projectile.setKind(SpriteKind.Goal)
+    if (Math.percentChance(25)) {
         projectile.setImage(img`
             .........cccc...........
             .......ccddddcc.........
