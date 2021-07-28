@@ -1,18 +1,23 @@
 namespace SpriteKind {
     export const Goal = SpriteKind.create()
+    export const Life = SpriteKind.create()
 }
+info.onCountdownEnd(function () {
+    if (info.score() >= 10) {
+        game.over(true)
+    } else {
+        game.over(false)
+    }
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Goal, function (sprite, otherSprite) {
     music.baDing.play()
     otherSprite.destroy()
     info.changeScoreBy(1)
-    if (info.score() == 10) {
-        game.over(true)
-    }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     music.thump.play()
     otherSprite.destroy()
-    info.changeScoreBy(-1)
+    info.changeLifeBy(-1)
 })
 let projectile: Sprite = null
 scene.setBackgroundColor(9)
@@ -64,6 +69,8 @@ let mySprite = sprites.create(img`
 mySprite.x = 120
 controller.moveSprite(mySprite, 0, 100)
 info.setScore(0)
+info.setLife(3)
+info.startCountdown(15)
 game.onUpdateInterval(500, function () {
     projectile = sprites.createProjectileFromSide(img`
         .........bbbb...........
@@ -84,8 +91,9 @@ game.onUpdateInterval(500, function () {
         ......ccccccccccc.......
         `, 50, 0)
     projectile.y = randint(10, 110)
-    projectile.setKind(SpriteKind.Goal)
-    if (Math.percentChance(25)) {
+    if (Math.percentChance(75)) {
+        projectile.setKind(SpriteKind.Goal)
+    } else {
         projectile.setImage(img`
             .........cccc...........
             .......ccddddcc.........
