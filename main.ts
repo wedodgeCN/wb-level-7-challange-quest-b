@@ -49,7 +49,7 @@ game.setDialogFrame(img`
     `)
 game.showLongText("Collect at least 10 white clouds.", DialogLayout.Center)
 game.showLongText("Avoid the gray storm clouds!", DialogLayout.Center)
-let mySprite = sprites.create(img`
+let plane = sprites.create(img`
     ....ffffff.........ccc..
     ....ff22ccf.......cc4f..
     .....ffccccfff...cc44f..
@@ -67,8 +67,8 @@ let mySprite = sprites.create(img`
     ..........fc2ffff.......
     ...........fffff........
     `, SpriteKind.Player)
-mySprite.x = 120
-controller.moveSprite(mySprite, 0, 100)
+plane.x = 120
+controller.moveSprite(plane, 0, 100)
 info.setScore(0)
 info.setLife(3)
 info.startCountdown(15)
